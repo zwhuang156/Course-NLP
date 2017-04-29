@@ -10,8 +10,10 @@ filter_list = '~!@#$%^&*()_+`1234567890-=\\{\\}[]\|;:\'\"><:;,.?/'
 
 def main():
     aspect_review_list = parser.aspect_review()
+    print aspect_review_list
     for line in aspect_review_list:
         print line[0]
+        # print type(line[1])
         print '/'.join(jieba.cut(line[1]))
         # finder = BigramCollocationFinder.from_words(jieba.cut(line[1]))
         # finder.apply_word_filter(lambda w: w.lower() in filter_list)

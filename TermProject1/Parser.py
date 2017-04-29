@@ -11,7 +11,7 @@ class Parser():
             each_aspect = []
             for line in file:
                 # print line.strip()
-                each_aspect.append(line.strip())
+                each_aspect.append(line.strip().decode('utf-8'))
                 index += 1
                 if index == 4:
                     index = 0
@@ -22,3 +22,4 @@ class Parser():
 if __name__ == '__main__':
     parser = Parser()
     aspect_review_list = parser.aspect_review()
+    print aspect_review_list
