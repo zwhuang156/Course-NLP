@@ -2,7 +2,7 @@ class Parser():
     """docstring for Parser"""
     def __init__(self):
         self.data_folder = "./data/"
-        self.filter_punc = ",，.．。!！?？-()「」:、;"
+        self.filter_punc = ",，.．。!！?？-()「」『 』:、; "
 
     def aspect_review(self):
         index_size = 4
