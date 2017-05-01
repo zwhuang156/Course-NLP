@@ -2,6 +2,7 @@ class Parser():
     """docstring for Parser"""
     def __init__(self):
         self.data_folder = "./data/"
+        self.filter_punc = ",，.．。!！?？-()「」:、;"
 
     def aspect_review(self):
         index_size = 4
@@ -11,7 +12,10 @@ class Parser():
             each_aspect = []
             for line in file:
                 # print line.strip()
-                each_aspect.append(line.strip().decode('utf-8'))
+                line = line.strip()
+                for punc in self.filter_punc:
+                    line = line.replace(punc, '')
+                each_aspect.append(line)
                 index += 1
                 if index == 4:
                     index = 0
@@ -22,4 +26,5 @@ class Parser():
 if __name__ == '__main__':
     parser = Parser()
     aspect_review_list = parser.aspect_review()
-    print aspect_review_list
+    for line in aspect_review_list:
+        print (line[1])
