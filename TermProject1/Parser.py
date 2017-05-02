@@ -6,7 +6,7 @@ class Parser():
     """docstring for Parser"""
     def __init__(self):
         self.data_folder = "./data/"
-        self.filter_punc = ",，.．。!！?？-()（）「」『 』:：、; "
+        self.filter_punc = ",，.．。!！?？-()（）「」『 』:：、;～ "
 
     '''
     if parse aspect_term.txt the size = 4
@@ -18,7 +18,6 @@ class Parser():
         with open(self.data_folder + file_name) as file:
             aspect = []
             for line in file:
-                # print line.strip()
                 line = line.strip()
                 for punc in self.filter_punc:
                     line = line.replace(punc, ',')
@@ -47,6 +46,15 @@ class Parser():
                     index = 0
         return aspect_review_list
 
+    def polarity_review(self):
+        polarity_review = []
+        with open(self.data_folder + 'polarity_review.txt') as file:
+            for line in file:
+                line = line.strip()
+                line = line.split('\t')
+                polarity_review.append(line)
+        return polarity_review
+
     def read_test(self):
         csv_reader = list(csv.reader(open(self.data_folder + 'test.csv')))
         return csv_reader[1:]
@@ -61,8 +69,6 @@ class Parser():
                 terms.append(aspect)
                 aspect_term[aspect] = terms
         return aspect_term
-
-
 
     def negative(self):
         with open(self.data_folder + 'NTUSD_neg.txt') as file:
@@ -84,4 +90,4 @@ class Parser():
 if __name__ == '__main__':
     parser = Parser()
     parser.parse_review('aspect_review_half.txt', 4)
-    print (parser.read_aspect_term())
+    print (parser.polarity_review())

@@ -1,10 +1,5 @@
 from Parser import Parser
-import nltk
-from nltk.collocations import *
-from gensim.models import word2vec
 import jieba
-import numpy as np
-
 
 class ReviewOpinion(object):
     """docstring for ReviewOpinion"""
