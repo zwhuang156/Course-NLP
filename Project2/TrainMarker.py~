@@ -1,0 +1,55 @@
+import csv
+import jieba
+
+
+class word():
+    def __init__(self):
+		self.dictionary = {}
+		self.dictionary['Contingency'] = 0
+		self.dictionary['Expansion'] = 0
+		self.dictionary['Temporal'] = 0
+		self.dictionary['Comparison'] = 0
+		
+class Parser():
+    """docstring for Parser"""
+    def __init__(self):
+		self.data_folder = "./data/train.csv"
+		
+		# jieba custom setting.
+		jieba.set_dictionary('jieba_dict/dict.txt.big')
+		
+		# load stopwords set
+		self.stopwordset = set()
+		with open('jieba_dict/stop_words.txt','r',encoding='utf-8') as sw:
+			for line in sw:
+				self.stopwordset.add(line.strip('\n'))
+		# D[word] = word()
+		self.D = {}
+
+		
+    def parse_review(self):
+        index = 0
+        aspect_review_list = []
+        with open(self.data_folder) as file:
+            for line in file:
+                line = line.strip().split(',')
+				sentence_1 = self.segment(line[1])
+				sentence_2 = self.segment(line[2])
+				for word in sentence_1:
+					try:
+						self.D[word].dictionary[line3] += 1				
+					except:
+						self.D[word] = word()
+						self.D[word].dictionary[line3] += 1
+		
+	def segment(self, line):
+		result = []
+		words = jieba.cut(line, cut_all=False)
+		for word in words:
+			if word not in self.stopwordset:
+				result.append(word)
+		return result
+		
+		
+		
+		
